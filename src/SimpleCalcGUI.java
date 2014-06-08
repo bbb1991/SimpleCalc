@@ -4,12 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SimpleCalcGUI {
-    private JFrame frame;
     private JButton buttonOne, buttonTwo, buttonThree, buttonFour, buttonFive, buttonSix,
         buttonSeven, buttonEight, buttonNine, buttonZero, buttonOnClear, buttonOff,
         buttonDivide, buttonMultiply, buttonPlus, buttonMinus, buttonEquals;
-
-    private JPanel mainPanel, displayPanel, controlPanel;
 
     private JTextArea display;
 
@@ -34,10 +31,10 @@ public class SimpleCalcGUI {
     }
 
     public void go() {
-        frame = new JFrame("Calc");
-        mainPanel = new JPanel();
-        displayPanel = new JPanel();
-        controlPanel = new JPanel();
+        JFrame frame = new JFrame("Calc");
+        JPanel mainPanel = new JPanel();
+        JPanel displayPanel = new JPanel();
+        JPanel controlPanel = new JPanel();
         display = new JTextArea(1, 15);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
