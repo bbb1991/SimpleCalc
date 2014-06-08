@@ -73,8 +73,6 @@ public class SimpleCalcGUI {
         buttonOff.addActionListener(new OffActionListener());
     }
 
-
-
     class OnActionListener implements ActionListener {
 
         @Override
