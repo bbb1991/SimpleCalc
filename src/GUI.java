@@ -3,14 +3,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SimpleCalcGUI {
+public class GUI {
     private JButton buttonOne, buttonTwo, buttonThree, buttonFour, buttonFive, buttonSix,
-        buttonSeven, buttonEight, buttonNine, buttonZero, buttonOnClear, buttonOff,
+        buttonSeven, buttonEight, buttonNine, buttonZero, buttonOnClear,
         buttonDivide, buttonMultiply, buttonPlus, buttonMinus, buttonEquals;
 
     private JTextArea display;
 
-    public SimpleCalcGUI() {
+    public GUI() {
         buttonOne = new JButton("1");
         buttonTwo = new JButton("2");
         buttonThree = new JButton("3");
@@ -22,7 +22,6 @@ public class SimpleCalcGUI {
         buttonNine = new JButton("9");
         buttonZero = new JButton("0");
         buttonOnClear = new JButton("ON/C");
-        buttonOff = new JButton("OFF");
         buttonDivide = new JButton("/");
         buttonMultiply = new JButton("*");
         buttonPlus = new JButton("+");
@@ -31,7 +30,7 @@ public class SimpleCalcGUI {
     }
 
     public void go() {
-        JFrame frame = new JFrame("Calc");
+        JFrame frame = new JFrame("SimpleCalc", null);
         JPanel mainPanel = new JPanel();
         JPanel displayPanel = new JPanel();
         JPanel controlPanel = new JPanel();
@@ -47,7 +46,6 @@ public class SimpleCalcGUI {
 
         displayPanel.add(display);
         controlPanel.add(buttonOnClear);
-        controlPanel.add(buttonOff);
 
         mainPanel.add(buttonOne);
         mainPanel.add(buttonTwo);
@@ -70,28 +68,46 @@ public class SimpleCalcGUI {
         frame.setSize(180, 250);
 
         buttonOnClear.addActionListener(new OnActionListener());
-        buttonOff.addActionListener(new OffActionListener());
+
+        buttonOne.addActionListener(numActionListener);
+        buttonTwo.addActionListener(numActionListener);
+        buttonThree.addActionListener(numActionListener);
+        buttonFour.addActionListener(numActionListener);
+        buttonFive.addActionListener(numActionListener);
+        buttonSix.addActionListener(numActionListener);
+        buttonSeven.addActionListener(numActionListener);
+        buttonEight.addActionListener(numActionListener);
+        buttonNine.addActionListener(numActionListener);
+        buttonZero.addActionListener(numActionListener);
+
+        buttonMinus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
+
+    ActionListener numActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setNumberText(e.getActionCommand());
+        }
+    };
+
+    public void setNumberText(String inputNumber) {
+        String lastDit = this.display.getText();
+        if ((lastDit.equals("")) && (inputNumber.equals("."))){
+            inputNumber = "";
+        }
+        this.display.setText(lastDit+inputNumber);
     }
 
     class OnActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!display.isEnabled()) {
-                display.setEnabled(true);
-                display.setText("0");
-            } else {
-                display.setText("0");
-            }
-        }
-    }
-
-    class OffActionListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            display.setEnabled(false);
-            display.setText("");
+            display.setText("0");
         }
     }
 }
