@@ -38,7 +38,8 @@ public class GUI {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         display.setEditable(false);
-        display.setEnabled(false);
+        display.setEnabled(true);
+        //display.setTextC
 
         frame.getContentPane().add(BorderLayout.NORTH, displayPanel);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
@@ -83,7 +84,35 @@ public class GUI {
         buttonMinus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setOperation(1);
+            }
+        });
 
+        buttonPlus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setOperation(2);
+            }
+        });
+
+        buttonMultiply.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setOperation(3);
+            }
+        });
+
+        buttonDivide.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setOperation(4);
+            }
+        });
+
+        buttonEquals.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getResult();
             }
         });
     }
@@ -100,7 +129,7 @@ public class GUI {
         if ((lastDit.equals("")) && (inputNumber.equals("."))){
             inputNumber = "";
         }
-        this.display.setText(lastDit+inputNumber);
+        this.display.setText(lastDit + inputNumber);
     }
 
     class OnActionListener implements ActionListener {
@@ -109,5 +138,19 @@ public class GUI {
         public void actionPerformed(ActionEvent e) {
             display.setText("0");
         }
+    }
+
+    private void setOperation(int code) {
+        CalcOperations.setOperationCode(code);
+        CalcOperations.setFirstNumber(Float.parseFloat(display.getText()));
+        display.setText("");
+    }
+
+    private void getResult() {
+        double result;
+        CalcOperations.setSecondNumber(Float.parseFloat(display.getText()));
+        result = CalcOperations.getResult();
+        display.setText(String.valueOf(result));
+
     }
 }
