@@ -4,9 +4,9 @@ public class CalcOperations {
 
     private static float firstNumber = 0;
     private static float secondNumber = 0;
-    private static int operationCode = 0;
+    private static OperationCodes operationCode;
 
-    public static void setOperationCode(int operationCode) {
+    public static void setOperationCode(OperationCodes operationCode) {
         CalcOperations.operationCode = operationCode;
     }
 
@@ -18,7 +18,7 @@ public class CalcOperations {
         CalcOperations.firstNumber = firstNumber;
     }
 
-    private static double summ() {
+    private static double sum() {
         return firstNumber + secondNumber;
     }
 
@@ -34,32 +34,31 @@ public class CalcOperations {
         double result;
         try {
             result = firstNumber / secondNumber;
-            if (result == Double.NaN | result == Double.NEGATIVE_INFINITY | result == Double.POSITIVE_INFINITY) {
+            if (result == Double.NaN || result == Double.NEGATIVE_INFINITY || result == Double.POSITIVE_INFINITY) {
                 throw new ArithmeticException();
             }
             return result;
         } catch (ArithmeticException e) {
-            JOptionPane.showMessageDialog(null, "Divide by zero!", "Invalid operation!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Деление на ноль!!!111", "Invalid operation!", JOptionPane.ERROR_MESSAGE);
             return Double.parseDouble(null);
         }
     }
         public static double getResult() {
         double result = 0;
             switch (operationCode) {
-                case 1:
+                case MINUS:
                     result = sub();
                     break;
-                case 2:
-                    result = summ();
+                case PLUS:
+                    result = sum();
                     break;
-                case 3:
+                case MULTIPLY:
                     result = mul();
                     break;
-                case 4:
+                case DIVIDE:
                     result = divide();
             }
             return result;
-
     }
 
 

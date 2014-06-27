@@ -34,12 +34,13 @@ public class GUI {
         JPanel mainPanel = new JPanel();
         JPanel displayPanel = new JPanel();
         JPanel controlPanel = new JPanel();
-        display = new JTextArea(1, 15);
+
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
+
+        display = new JTextArea(1, 15);
         display.setEditable(false);
         display.setEnabled(true);
-        //display.setTextC
 
         frame.getContentPane().add(BorderLayout.NORTH, displayPanel);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
@@ -84,28 +85,28 @@ public class GUI {
         buttonMinus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setOperation(1);
+                setOperation(OperationCodes.MINUS);
             }
         });
 
         buttonPlus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setOperation(2);
+                setOperation(OperationCodes.PLUS);
             }
         });
 
         buttonMultiply.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setOperation(3);
+                setOperation(OperationCodes.MULTIPLY);
             }
         });
 
         buttonDivide.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setOperation(4);
+                setOperation(OperationCodes.DIVIDE);
             }
         });
 
@@ -125,11 +126,8 @@ public class GUI {
     };
 
     public void setNumberText(String inputNumber) {
-        String lastDit = this.display.getText();
-        if ((lastDit.equals("")) && (inputNumber.equals("."))){
-            inputNumber = "";
-        }
-        this.display.setText(lastDit + inputNumber);
+        String lastDit = display.getText();
+        display.setText(lastDit + inputNumber);
     }
 
     class OnActionListener implements ActionListener {
@@ -140,8 +138,8 @@ public class GUI {
         }
     }
 
-    private void setOperation(int code) {
-        CalcOperations.setOperationCode(code);
+    private void setOperation(OperationCodes operationCode) {
+        CalcOperations.setOperationCode(operationCode);
         CalcOperations.setFirstNumber(Float.parseFloat(display.getText()));
         display.setText("");
     }
